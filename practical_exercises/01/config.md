@@ -3,16 +3,16 @@
 ## Assign addresses to interfaces
 
 ```
-configure term
+conf t
 interface fastEthernet 0/0
-no shutdown
 ip address 10.0.1.1 255.255.255.0
+no shutdown
 end
 
-configure term
+conf t
 interface fastEthernet 0/1
-no shutdown
 ip address 10.0.100.1 255.255.255.0
+no shutdown
 end
 ```
 
@@ -31,24 +31,24 @@ end
 ## Assign addresses to interfaces
 
 ```
-configure term
+conf t
 interface fastethernet 0/0
-no shutdown
 ip address 10.0.100.2 255.255.255.0
-end
-
-configure term
-interface fastethernet 0/1
 no shutdown
-ip address 10.0.200.1 255.255.255.0
 end
 
-configure term
+conf t
+interface fastethernet 0/1
+ip address 10.0.200.1 255.255.255.0
+no shutdown
+end
+
+conf t
 interface fastethernet 1/0
 ! Configure port in L3 mode
 no switchport
-no shutdown
 ip address 10.0.2.1 255.255.255.0
+no shutdown
 end
 ```
 
