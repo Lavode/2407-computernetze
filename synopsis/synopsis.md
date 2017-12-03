@@ -308,3 +308,119 @@ TODO: img hidden node
 - WEP: Shared secret (aber unsicher)
 - IEEE 802.11i: Periodische Schlüsseländerung
 - IEEE 802.1X: Radius
+
+# Sicherung
+
+- HDLC: Austausch von Bf und Mld zwischen Leit- und Folgestationen
+  - Aufforderungsbetrieb: Folgestation sendet nur nach Aufruf (Polling)
+  - Spontanbetrieb: Folgestation kann jederzeit Mldg an Leitstation senden
+  - Gleichberechtigter Spont Betr: Hypridstationen dürfen jederzeit Mld und Bf
+    übermitteln
+
+## Rahmenerkennung
+
+### Bit stuffing
+
+- Ausser bei Flags fügt Sneder nach jedem fünften 1 eine 0 ein
+- Empfänger löscht diese
+
+### Character (Byte) stuffing
+
+- \DLE: Zeigt Steuerzeichen an
+- \STX: Xstart of Text, \ETX: End of text
+- Literal \DLE: \DLE\DLE
+  - Bsp: PPP
+
+### Prüfsummen
+
+- Bsp ATM: HEC Erkennung
+
+TODO: img atm hec
+
+### Zählen
+
+- Bsp SONET
+
+### Coderegelverletzung
+
+- Bsp 4B5B: Nutzt 16 von 32 Codewörtern
+  - Ungültige zeigen Beginn/Ende eines Rahmens
+
+## Fehlerkontrolle
+
+- Erkennung:
+  - Verlust / Duplizierung Dateneinheit
+  - Abweichung Empfangsreihenfolge
+  - Bit-Swaps
+
+- Korrektur:
+  - Negative Quittung -> Falsch empfangen oder Timeout, erneutes Senden
+  - Vorwärtsfehlerbehebung: Falls Code erlaubt
+  - Hamming Codes: h(C): Min Abstand d Code C. h(C) = d + 1 -> Bis zu d Fehler
+    erkennbar, h(C) = 2e + 1 -> Bis zu e fehler korrigierbar.
+
+### Prinzip
+
+- Ergänzen der Codes um redundante Informationen, so dass gültige Wörter mehr
+  als 1 Zeichen unterschied
+
+### Fehlererkennend
+
+- Paritätsbit
+  - Längs/Querparität (Gerade/Ungerade Anzahl 0/1)
+- Prüfsummen (Internet-Prüfsumme)
+  - Weniger robust als CRC
+  - Basiert auf Einerkomplement
+  - Einfach zu implementieren
+
+#### CRC
+
+TODO: img CRC 
+
+- Einzelbitfehler: G(x) = x^i + x^j: Erkennt alle 1-Bit Fehler
+- Zweibitfehler: G(x) so dass nicht durch x teilbar, und kein Teiler von x^k +
+  1, dann alle Zweitbitfehler erkannt.
+  - Bsp: x^15 + x^14 + 1 nicht Teiler von x^k + 1 für k kleiner 32'768
+- Ungerade Anzahl: G(x) mit Faktor x+1 erkennt alle Fehler mit ungerader Anzahl
+  an Fehlern
+  - CRC-12: x^12 + x^11 + x^3 + x^2 + x + 1
+- Burst-Fehler: Gen Pol mit r Bits erkennt alle Burst-Fehler deren Länge
+  kleiner-gleich r
+
+## Übertragungswiederholung
+
+### Stop-and-wait
+
+- Jedes Paket quittiert, synchron
+- Bleibt Quittung aus (Timeout) oder Negativquittung (Fehler): Wiederholung
+
+### Go-Back-N
+
+- Jedes Paket hat Sendenummer
+- Bei Empfang Paket N: Quittierung Paket N-1
+- Falls Nr von empfangenem Paket zu hoh: Ein Paket verloren -> Reject, retransmit, ack
+
+TODO: img go-back-n
+
+### Selektive Wiederholung
+
+TODO: img selektiv
+
+## Fehlerkorrigierende Codes
+
+- Hamming: Weitere Redundanzinformationen
+  - zB Code X, Erkennung & korrektur von Einfachfehlern, oder Erkennung von Zweifachfehlern
+
+TODO: img hamming
+
+## Flusskontrolle
+
+- X-On/ X-Off: Unterbruch/Wiederaufnahme Transfer
+- Stop-and-Go
+- Fensterbasiert (HLDC)
+  - Mit jeder Quittung: Angabe eines Windows (ab quittiertem Element) wieviele
+    Pakete bereit zu empfangen
+- Ratenbasiert
+  - x Pakete / s
+
+TODO: img hdlc_fenster
