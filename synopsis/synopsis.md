@@ -232,3 +232,79 @@ TODO: img multiplex
   - Präambel bestimmt Sendetakt
   -  Start-Frame-Delimiter zeigt Beginn der Daten
   -  Codierung erlaubt Taktrückgewinnung
+
+# Medienzugriff
+
+## Zugangskontrolle
+
+- Fest: ISDN-B: SDH/SONET Nachrichten
+- Variabel
+  - Dezentral: Ethernet, WLAN DCF
+  - Zentral: WLAN PCF
+
+## Ethernet
+
+TODO: img ethernet
+
+- 10 Base 5: Koax, max 500m
+- 10 Base 2: Dünnes Koax, max 200m
+- 10 Base T: UTP, max 100m
+- 10 Base F: LWL
+
+### CSMA/CD
+
+TODO: img CSMA
+
+### History
+
+- Fast Ethernet
+  - 1995
+  - 100 Base T/TX/T4/FX
+  - CSMA/CD
+- Gigabit Ethernet
+  - 1999
+  - 1000 Base X
+  - 25-100m (KOAX), 55m (Multimode LWL), 5km (Monomode LWL)
+  - CSMA/CD
+  - 8B10B
+  - 512 Bytes min. frame size
+- 10-Gigabit Ethernet
+  - 2002
+  - Auto-negation d Geschwindigkeit
+  - Monomode LWL bis 40km oder
+  - Multimode LWL (weniger) oder
+  - 4 Paare UTP6
+  - Meist 64B66B
+- 100-Gigabit Ethernet
+  - 2010
+  - Lanes: Aufteilung Daten in 66-Bit Worte, Verteilen (round-robin) auf
+    mehrere 4, 10, ... Spuren
+  - Kupfer, Multimode, Monomode
+- 200/400 Gigabit Ethernet
+  - 2017
+  - Mehrere Fasern / Wellenlängen pro Faser
+  - Multimode (100m), Monomode (10km)
+  - Fehlerbehebung durch Kodierung
+
+## WLAN 802.11
+
+TODO: img wlan
+
+### CSMA/CA
+
+TODO: img CSMA/CA
+
+### Probleme Drahtlos
+
+- Hidden Node: Empfänger ausserhalb Fk Bereich
+  - RTS/CTS (Ready to send / clear to send)
+
+TODO: img hidden node
+
+### Sicherheit
+
+- ESSID: In Cleartext in zB Mgmt Frames
+- MAC Addresse: Spoofing, Konfigurationsaufwand
+- WEP: Shared secret (aber unsicher)
+- IEEE 802.11i: Periodische Schlüsseländerung
+- IEEE 802.1X: Radius
