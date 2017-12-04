@@ -423,4 +423,47 @@ TODO: img hamming
 - Ratenbasiert
   - x Pakete / s
 
-TODO: img hdlc_fenster
+TODO: img hdlc fenster
+
+# Lokale Netze
+
+- Ausdehnung durch physikalische Zugriffsverfahren (zB Ethernet) limitiert.
+- Verbindung von Segmenten durch
+  - Repeater: Bitübertragungsschicht
+  - Bridges: Sicherungsschicht
+  - Router: Vermittlngsschicht
+
+## Repeater
+
+- Aka hub
+- Ein Bitstrom Input, ein Bitstrom Output
+- Verstärkt / bereitet auf
+- Konvertierung Übertragungsmedium, Kodierung
+- Evtl verschiedene Geschwindigkeiten
+- Bildung Kollisionsdomäne
+
+## Bridges
+
+- Bildung von Broadcast-Domänen
+- Empfangen Paket auf einem Eingang, leiten auf alle oder mehree Ausgänge weiter
+- Transparente Bridges: Lernen Lokation von Endsystemen
+  - zB empfängt Pakete von A zu C auf port x => A hängt an Port x. Falls C
+    bekannt -> weiterleiten, sonst -> fluten
+  - Filtern: Pakete mit lokalen Addressen nicht über Bridge weitergeleitet
+- Source-Routing Bridges: Intelligenz in Endsystemen
+- Spanning tree vermeidet Schleifen
+- Remote Bridges: Verbindung zweier LAN via ein WAN. Enkapsulierung, LAN
+  greifen nicht auf WAN zu.
+
+### Spanning Tree
+
+TODO: img spanning tree
+
+### VLAN
+
+- Ohne VLAN: Zugehörigkeit zu LAN basiert auf geographischen Eigenschaften
+- Mit: Basierend auf anderen Eigenschaften, zB Abteilung
+- Erlaubt ortsunabhängige Broadcast-Domänen
+- 'Einfärbung' von Paketen
+
+TODO: img vlan
