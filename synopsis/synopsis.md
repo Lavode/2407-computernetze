@@ -644,3 +644,99 @@ TODO: img protokollmodi
 ### MPLS
 
 - Virtuelle Vrb in Internet
+
+# Routing
+
+- Statisch
+  - Tabellen manuell definiert
+  - Fehleranfällig
+  - Einfach
+- Dynamisch
+  - Durch Austausch von Routing-Informationen
+  - Gleiche Routing-Protokolle in Domäne
+- Weiterleiten von Paketen
+  - Direkt: Ziel ist lokal erreichbar, Auswahl des Netztes mit längster
+    Präfix-Übereinstimmung
+  - Indirekt: Ziel via anderen Router erreichbar, Auswahl des N mit längster
+    Präfix-Übereinstimmung
+  - Default
+    - Weiterleiten an Default-Router
+
+## Intra-Domain Routing Protokolle
+
+### Distance-Vector Routing
+
+- Jeder Router hat Informationen über *seine* Distanz/Kosten zu jedem anderen Router
+- Verteilt sämtliche Informationen an benachbarte Router
+- Bsp: Routing Information Protocol
+
+### Link-State Routing
+
+- Jeder Router verteilt lokale Link-Informationen durch Fluten
+- Hat vollständiges Wissen über Topologie
+- Berechnet mit Dijkstra's SP Algorithmus den Pfad
+- Bsp: OSPF
+
+### RIP
+
+- Zwischcensystem kennt nur benachbarte Systeme
+- Alle 30s komplette Routing-Informationen versendet
+- Ausbreiten der Routing Informationen langsam (15 Hops: 7 Minuten)
+- Count-to-infinity
+
+TODO: img rip
+
+### Count to Infinity
+
+TODO: img count to infinity
+
+### Triggered Update
+
+- Routing Einträge ungültig markiert falls innerhalb bestimmter Zeitspanne (6*30s) keine Updates
+- Separates Fluten jener Nachrichten -> Keine Delays
+- Schnellere Konvergenz, vermeidet Count-to-infinity
+
+### OSPF
+
+- Entdecken neuer Nachbar via Hello Pakete
+- Verteilen der gelernten Informationen an Nachbarn
+- Dijkstra
+- Hierarchiebildung durch Partitionierung in Areas/Bereiche
+
+TODO: img ospf
+
+## AS
+
+- Stub-AS: AS mit Verbindung zu anderen AS, zB kleines Unternehmen
+- Multi-homed AS: AS mit mehreren Vrb zu anderen AS, aber kein Transit-Verkehr
+- Transit AS: AS welches Transit-Verkehr transportiert
+- Border-Router: Router über jenen Pakete in/aus AS gehen
+- BGP Speaker: Kommuniziert mit BGP Speaker in anderem AS (mind 1 je AS, häufig
+  == Border Router)
+
+## BGP
+
+- Zwischen Domänen / AS
+- Skalierbarkeit
+- Verbreitet vollständige Pfade, nummeriert (Verhinderung von Schleifen)
+- BGP Speaker kann selektiv aus jenen Pfaden auswählen, handhabt intern
+
+TODO: img bgp
+
+### Integration BGP intern
+
+- Durch Border Router / AS Speaker
+- zB spezielle OSPF advertisements, oder iBGP (internal BGP)
+
+TODO: img integration
+
+## Multicast
+
+- Systeme können Gruppen beitreten
+- Sender kennt Empfänger nicht
+- Aufbau Multicast Baum
+- Abbildung IP Addr auf spezielle Mutlicast MAC Addr
+
+### Routing
+
+TODO: img multicast routing
