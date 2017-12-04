@@ -513,3 +513,134 @@ TODO: img vlan
 - Optionales Frequenz-Hopping
 
 TODO: img virtuelle vrb datagramme
+
+# IP
+
+## IPv4
+
+TODO: img ipv4
+
+- IPv4 Optionen
+  - Exact routing: Genaue Angabe Pfad
+  - Loose Routing: Angabe von gewissen Routern die Teil des Pfads
+  - Record Route
+  - Timestamp: Zeitstempel erfassen
+  - IP Sec: Verschlüsselung & Authentifizierung
+
+## IPv6
+
+Todo: img ipv6
+
+- Verketten von Erweiterungsheadern
+  - Kleinerer minimaler Header
+  - Flexibler Header
+  - Einfache Einführung neuer Optionen
+
+## v4 Adressierung
+
+TODO: img ipv4 addressierung
+
+- Klassnbasiert wenig Flexibilität, viel Verschnitt, grosse Routingtabellen
+- Classless: Besser (zB Aggregation)
+
+## v6 Adressierung
+
+- Globales Routing Präfix: Ist einer 'Site' (Stao, Org) zugeordnet
+- Subnet ID: ID eines Subnet innerhalb der Site
+
+## ICMP
+
+- Echo, Fehlermeldungen
+- Von Diagnoseprogrammen verwendet
+
+## IP Funktionen
+
+- TTL
+- Routing
+- ToS
+- Segmentierung (auch bei Router bei IPv4, nur bei Sender bei IPv6)
+  - Auch IPv4 Router häufig ohne Segmentierung-Support wegen Effort
+  - MTU: Max. Grösse IP Packet bei Pfad
+  - Alternative: Path MTU discovery
+
+## Adresskonfiguration
+
+- Statisch auf Interface
+- Automatisch IPv6
+  - Adresspräfix & 64-bit Interface-ID
+- DHCP (Server, Relays, Clients)
+  - Broadcast Discover
+  - n * Unicast Offer
+  - n-1 * Reject, 1 * Confirm
+  - 1 * Ack
+  - 1 * Release
+
+## ARP
+
+- Caching auf Hosts / Switches / ...
+- Broadcast ARP Request
+- ARP Reply with MAC
+- Inverse ARP: Allows learning IP of P2P partner.
+
+TODO: img arp
+
+## Tunneling
+
+- Einkapselung IP Pakete in IP Pakete.
+- Header des inneren Pakets nicht sichtbar / ist payload
+- VPN, Überbrückung nicht-multicast-fähiger Netze, Mobile IP, IPv6 over IPv4, ...
+
+## IPSec
+
+- Entwicklung mit IPv6, Integration in IPv4
+- AH: Sender-Authentifizierung, Datenintegrität
+- ESP: Encapsulation Security Payload: Verschlüsselung
+- ISAKMP: Sicherheitsassoziationen
+- IKE: Schlüsselaustausch
+
+### Sicherheitsassoziation
+
+- Kommunikationspartner gemeinsame Paramter vereinbaren
+- Logische *unidirektionale* Vrb zwischen Sender und Empfänger
+- Identifiziert durch (Ziel-IP, SPI, IPSec Protokoll)
+- Bsp Parameter: Sequenznummerenzähler, Pfad-MTU, IPSec Protokollmodus
+  (Transport/Tunnel), ..
+
+### Replay-Attacken
+
+- Schutz via Sequenznummernzähler
+- Empfänger verwirft Pakete unter Sequenznummer [N-W+1 .. N]
+  - N: Höchste empfangene Sequenznummer, W: Fensterbreite (Default: 64)
+- Erreichen von Limit (2^32-1): Neue SA mit neuen Schlüsseln
+
+### AH / Authentication Header
+
+- Default Algorithmus: Keyed MD5, 128 Bit Hash, über nicht-änderbare IP Header,
+  AH Header selbst, geheimen Schlüssel, höhere Protokolle und Daten
+
+### ESP
+
+- IV in Daten-Feld
+- Padding
+  - Verschlüsselungsverfahren erwartet bestimmte Blocklänge
+  - Ausrichtung von Padding Length & Next Header
+  - Verschleiern der Paketlänge
+
+TODO: img esp
+
+### Protokollmodi
+
+TODO: img protokollmodi
+
+#### Transport-Modus
+
+- End2End Verschlüsselung
+
+#### Tunnel-Modus
+
+- Sec Gateway zu Sec Gateway (Site2Site VPN)
+- Endsystem zu Sec Gateway (Remote VPN)
+
+### MPLS
+
+- Virtuelle Vrb in Internet
