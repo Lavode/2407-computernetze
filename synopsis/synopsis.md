@@ -467,3 +467,49 @@ TODO: img spanning tree
 - 'Einfärbung' von Paketen
 
 TODO: img vlan
+
+# Vermittlung
+
+- Ziele
+  - Transportschicht sollte Topologie der Vermittlungsschicht (plus Anzahl und
+    Art der Knoten) nicht kennen (müssen)
+  - Unabhängig von Technologie der Knoten
+  - Einheitliches Addressierungskonzept
+- Funktion
+  - Wegewahl, Priorisierung, Weiterleitung
+  - Mögl Dienste: Garantierte / Reihenfolgegetreue Auslieferung, Garantierte
+    Bandbreite, Sicherheit, ...
+
+## Techniken
+
+- Circuit Switching / Leitungsvermittlung: Vgl Telefon-Schaltzentrale
+- Paketevermittlung / Packet Switching: Jedes Paket eigenes Routing
+
+### Leitungsvermittlung
+
+- Durchgängiger physikalischer Pfad für Kommunikation
+- Basiert auf Multiplexing
+- Raummultiplex: Analog. Tfnetz
+- Zeitmult: ISDN
+- Freqmult: Wavelength Division Multiplexing
+- Codemult: Mobilfunk
+
+### Paketvermittlung
+
+- Verbindungsorientiert (ATM) / Verbindungslos (IP)
+- Virtuelle Verbindung vs Datagramme
+- Entwicklung Fernsprechnetze:
+  - Direkte Leitung
+  - Analoge Vermittlung & Übertragung
+  - Digitale Vermittlung & Übertragung
+  - ISDN: Digital bis Teilnehmer
+  - Verbindung Vermittlungsstellen via Internet
+  - VOIP
+
+### GSM
+
+- Global System from Mobile Communication
+- 8 Zeitmultiplexkanäle, 200 kHz Kanalbreite
+- Optionales Frequenz-Hopping
+
+TODO: img virtuelle vrb datagramme
