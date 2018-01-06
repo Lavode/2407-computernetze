@@ -740,3 +740,139 @@ TODO: img integration
 ### Routing
 
 TODO: img multicast routing
+
+# Transportprotokolle
+
+## UDP
+
+- Verbindungslos
+- (In IPv4) optionale Fehlererkennung
+- Nachrichtenorientiert: Keine Reihenfolgeerhaltung, keine Fluss- und Staukontrolle
+- Multicast
+
+## TCP
+
+- Verbindungsorientiert
+- Fehlererkennung & Wiederholung
+- Bytestrom-ortienriert: Reihenfolge, Fluss- & Staukontrolle
+
+TODO: img state diagram
+TODO: img state diagram end
+
+### Fehlerkorrektur
+
+- Quittierung: Sofortig / Verzögerung
+- Falls Quittierung ausbleibt: Go-Back-N (oder optional selektive) Wiederholung
+- Timeout Zeit: Schätzung anhand empfangener Daten, versch. Algorithmen, zB
+  Erhöhung bei Retransmit (um Überlast zu vermeiden)
+
+### Flusskontrolle
+
+- Antwort beinhaltet
+  - ACK Feld: Bestätigt Empfang aller niedrigeren Sequenznummern
+  - AdvertisedWindow: Anzahl noch zu empfanen bereiter Bytes
+  - => Ack + AdvWindow = Maximal zu senden erlaubtes Paket
+
+### Staukontrolle
+
+- Stausituationen in Zwischesystemen führen zu erhöhtem Verkehr wegen
+  Retransmission -> Positive Feedback-Loop
+- Verhinderung durch:
+  - Anpassen Fenstergrösse (zu Beginn klein, dann ansteigend)
+  - Reduktion Fenstergrösse nach Timeout
+  - Congestion Notification: Zwischensystem setzt ToS Bit, Empfänger benachrichtig darauf Sender
+
+TODO: img Stauvermeidung
+
+### Zusammenspiel
+
+TODO: img Zusammenspiel
+
+# Dienste
+
+- Netzmanagement: Verwaltung Komponenten in Netzwerk (zB via SNMP)
+TODO: img netzmanagement
+
+# Anwendungen
+
+## FTP
+
+- Übertragung von Daten
+- Cmds: Verzeichniswechesl, Upload, Download, Delete, ...
+- Separate Kommando-Vrb (TCP 21)
+  - Persistent für Verbindung
+  - Aktuelles Verzeichnis persistent
+- Dateiübertragung: Textuell vs binär (TCP 20)
+  - Neu für jeden Transfer
+
+## TFTP
+
+- Dient zB automatischer Konfiguration von Systemen
+- Keine Authentifizierung
+
+## Mail
+
+### SMTP
+
+- Zwischen MTAs (und auch MUA/MTA bei Senden)
+
+### POP
+
+- Auth
+- Transaction: Download mails
+- Update: Delete mails on server
+- Flache/Strukturlose Hierarchie
+- Kein teilweiser Download (von zB Header Daten)
+- Kaum Multi-Device fähig
+
+### IMAP
+
+- Emails bleiben (stateful) auf Server
+- Verzeichnisse
+- Partieller Download
+
+### MIME
+
+TODO: img Transfer Encoding
+
+### Vertraulichkeit / Authentifizierung
+
+- zB PGP
+  - Authentifizierung via Message Digest
+  - Verschlüsselung via symmetrischen Sitzungsschlüssel (basierend auf asymmetrischem Paar)
+      - PGP: Optional auch asymmetrische (RSA) statt symmetrische (AES) Verschlüsselung
+
+## WWW
+
+- URL: Repräsentation der Lokation und Zugriffsmethode
+- HTML: Struktur der Seite
+
+### HTTP
+
+- Austausch von Seiten
+- Optional mit persistenten Vrb (kleinerer Perf Impact)
+
+#### Caching
+
+- Lokal durch Browser
+- Durch Proxies (nicht transparent) (?)
+- Transparent durch Router:
+  - Filtern gewisser Anfragen, weiterleiten an Proxies statt an eigentliches Ziel
+- Mittels Ablauf/Modifikationsdatum, sowie Digest
+    - Expires / If-Modified-Since / Etag
+
+#### Cookies
+
+- HTTP Zustandslos -> Cookies erlauben Speicherung von Zustand
+- Set cookie, identifier = x
+- Zukünftige Requests: Cookie identifier = x
+
+#### Web Services
+
+- Via REST / SOAP / ... RPC
+
+## P2P
+
+TODO: img p2p
+
+- Optional strukturierte P2P Netze: Verteilung der Daten auf Nodes nach gewissen Regeln
