@@ -1,5 +1,0 @@
-PWD /home/michael/study/unibe/2407-computernetze/git/synopsis/resources
-INPUT /usr/share/texmf-dist/web2c/texmf.cnf
-INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
-INPUT 09_ipv4_addressierung_1.png
-OUTPUT 09_ipv4_addressierung_1.log
